@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package skavl;
+
+/**
+* Testing proto package for per-repo building as well as for submodules
+*/
+message ProgressReport {
+  string project_name = 1;
+  float progress = 2;
+}

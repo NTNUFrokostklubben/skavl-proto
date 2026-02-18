@@ -1,0 +1,2 @@
+This repo will contain the .proto files used in other applications.
+Each application will be responsible for building the compiled class based on the proto files and this repo should be included as a submodule
