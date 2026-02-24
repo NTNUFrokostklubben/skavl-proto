@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package skavl.tiler.v1;
+
+enum TileState {
+  TILE_STATE_UNSPECIFIED = 0;
+  TILE_STATE_READY = 1;
+  TILE_STATE_QUEUED = 2;
+  TILE_STATE_GENERATING = 3;
+  TILE_STATE_MISSING = 4;
+  TILE_STATE_FAILED = 5;
+}
+
+message TileCoord {
+  uint32 level = 1;
+  uint32 x = 2;
+  uint32 y = 3;
+}
+
+message TileRef {
+  TileCoord coord = 1;
+  TileState state = 2;
+  string local_path = 3;
+  bool is_prefetch = 4;
+}
+
+message ViewportTileManifest {
+  string source_id = 1;
+  uint32 selected_level = 2;
+  repeated TileRef tiles = 3;
+}
+
+message SourceRef {
+  oneof ref {
+    string source_id = 1;
+    string source_path = 2;
+  }
+}
+
+message RectPx {
+  int64 x = 1;
+  int64 y = 2;
+  uint32 width = 3;
+  uint32 height = 4;
+}
+
+message TilesetDescriptor {
+  string source_id = 1;
+  uint32 source_width_px = 2;
+  uint32 source_height_px = 3;
+  uint32 tile_width_px = 4;
+  uint32 tile_height_px = 5;
+  uint32 min_level = 6;
+  uint32 max_level = 7;
+}
+
+service TilerService {
+  rpc DescribeSource(DescribeSourceRequest) returns (DescribeSourceResponse);
+  rpc PlanViewport(PlanViewportRequest) returns (PlanViewportResponse);
+}
+
+message DescribeSourceRequest {
+  SourceRef source = 1;
+}
+
+message DescribeSourceResponse {
+  TilesetDescriptor descriptor = 1;
+}
+
+message PlanViewportRequest {
+  SourceRef source = 1;
+  RectPx viewport_source_rect_px = 2;
+  double screen_pixels_per_source_pixel = 3;
+  uint32 prefetch_margin_tiles = 4;
+  bool queue_missing_tiles = 5;
+}
+
+message PlanViewportResponse {
+  ViewportTileManifest manifest = 1;
+}
