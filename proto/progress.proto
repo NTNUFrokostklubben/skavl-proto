@@ -9,3 +9,11 @@ message ProgressReport {
   string project_name = 1;
   float progress = 2;
 }
+
+message ProgressRequest {
+  
+}
+
+service ProgressService {
+  rpc GetProgress (ProgressRequest) returns (ProgressReport) {}
+}
