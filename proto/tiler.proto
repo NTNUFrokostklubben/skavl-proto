@@ -11,6 +11,8 @@ enum TileState {
   TILE_STATE_FAILED = 5;
 }
 
+// Level is the zoom level to load from disk, correlates with resolution
+// x and y are global space tile coordinates
 message TileCoord {
   uint32 level = 1;
   uint32 x = 2;
@@ -37,6 +39,7 @@ message SourceRef {
   }
 }
 
+// x and y are global coordinates in source pixels (level 0)
 message RectPx {
   int64 x = 1;
   int64 y = 2;

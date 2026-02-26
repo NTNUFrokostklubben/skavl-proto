@@ -20,11 +20,11 @@ Once both protoc and the protoc plugin is installed, run the `generate_dart.sh` 
 ## Python
 
 Required tools:
-- grpcio-tools
+- grpcio-tools v1.78.0
 
 Install grpcio-tools in your conda enviroment
 ```
-python -m pip install grpcio-tools
+conda install anaconda::grpcio-tools
 ```
 
 As long as this package is installed in the conda enviroment and the conda enviroment is active in the terminal, running `generate_python.sh` or `generate_python.ps1` from the root of the python repo should generate all required classes along with a `__init__.py` which allows for package imports.
