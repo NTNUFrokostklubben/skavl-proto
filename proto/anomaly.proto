@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package skavl.anomaly.v1;
+
+
+// Enum to declare if Anomaly server should continue processing where it left off or if it should restart
+enum StartMode {
+  START_RESTART = 0;
+  START_CONTINUE = 1;
+}
+
+// Easting and Northing meter offsets from the 0,0 origo for the UTM zone (usually center-point from geotiff gdalinfo)
+message UtmCoordinate {
+    double easting = 1;
+    double northing = 2;
+}
+
+// Data per image analyzed.
+message AnomalySet {
+    string image_name = 1;
+    double anomaly_confidence = 2;
+    int32 line_number = 3;
+    int32 image_number = 4;
+    UtmCoordinate geotiff_coordinate = 5;
+}
+
+// List of images processed with their confidence levels
+message AnomalyResponse {
+  ProjectMetadata project_metadata = 1;
+  int32 last_processed_index = 2;
+  repeated AnomalySet anomaly_sets = 3;
+}
+
+
+// Describes the project
+message ProjectMetadata {
+    string project_name = 1;
+    string sosi_file_path = 2;
+    string image_folder_path = 3;
+}
+
+// Request to anomaly server to see if project exists and 
+// if folder locations are accessible for the anomaly server.
+message DescribeAnomalyProjectRequest {
+    ProjectMetadata project_data = 1;
+}
+
+// Basic response if there are images in folder and if project exists or not
+message DescribeAnomalyProjectResponse {
+    ProjectMetadata project_data = 1;
+    int32 images_in_folder = 2;
+    int32 last_processed_image = 3;
+}
+
+// Request to start an anomaly analysis based on a project
+// Start mode describes if the analysis should start from image one or continue
+// from where the previous analysis failed or stopped
+message DetectAnomalySetRequest {
+    ProjectMetadata project_metadata = 1;
+    StartMode start_mode = 2;
+}
+
+// Returned once an anomaly analysis is complete or closed
+message DetectAnomalySetResponse {
+    AnomalyResponse anomaly_response = 1;
+}
+
+// gRPC contracts
+service AnomalyDetectorService {
+    rpc DescribeAnomalyProject(DescribeAnomalyProjectRequest) returns (DescribeAnomalyProjectResponse);
+    rpc DetectAnomalySet(DetectAnomalySetRequest) returns (DetectAnomalySetResponse);
+}
