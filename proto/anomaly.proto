@@ -42,12 +42,12 @@ message ProjectMetadata {
 // Request to anomaly server to see if project exists and 
 // if folder locations are accessible for the anomaly server.
 message DescribeAnomalyProjectRequest {
-    ProjectMetadata project_data = 1;
+    ProjectMetadata project_metadata = 1;
 }
 
 // Basic response if there are images in folder and if project exists or not
 message DescribeAnomalyProjectResponse {
-    ProjectMetadata project_data = 1;
+    ProjectMetadata project_metadata = 1;
     int32 images_in_folder = 2;
     int32 last_processed_image = 3;
 }
