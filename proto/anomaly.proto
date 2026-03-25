@@ -37,6 +37,7 @@ message ProjectMetadata {
     string project_name = 1;
     string sosi_file_path = 2;
     string image_folder_path = 3;
+    optional string sosi_water_mask_path = 4;
 }
 
 // Request to anomaly server to see if project exists and 
