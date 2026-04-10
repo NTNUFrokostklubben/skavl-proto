@@ -8,6 +8,12 @@ enum StartMode {
   START_RESTART = 0;
   START_CONTINUE = 1;
 }
+//Enum for types of anomalies currently in the project
+enum AnomalyTypes{
+   COLOR_AVERAGE = 'color_avg'
+    WATER_MASK = 'water_mask'
+    ARTIFACT = 'artifact'
+}
 
 // Easting and Northing meter offsets from the 0,0 origo for the UTM zone (usually center-point from geotiff gdalinfo)
 message UtmCoordinate {
@@ -19,9 +25,11 @@ message UtmCoordinate {
 message AnomalySet {
     string image_name = 1;
     double anomaly_confidence = 2;
-    int32 line_number = 3;
-    int32 image_number = 4;
-    UtmCoordinate geotiff_coordinate = 5;
+    AnomalyTypes  anomaly_type = 3;
+    int32 line_number = 4;
+    int32 image_number = 5;
+    UtmCoordinate geotiff_coordinate = 6;
+    
 }
 
 // List of images processed with their confidence levels
