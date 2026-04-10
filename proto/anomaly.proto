@@ -10,9 +10,10 @@ enum StartMode {
 }
 //Enum for types of anomalies currently in the project
 enum AnomalyTypes{
-   COLOR_AVERAGE = 'color_avg'
-    WATER_MASK = 'water_mask'
-    ARTIFACT = 'artifact'
+    UNDEFINED = 0;
+    COLOR_AVERAGE = 1;
+    WATER_MASK = 2;
+    ARTIFACT = 3;
 }
 
 // Easting and Northing meter offsets from the 0,0 origo for the UTM zone (usually center-point from geotiff gdalinfo)
