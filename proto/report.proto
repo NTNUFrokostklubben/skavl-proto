@@ -1,0 +1,24 @@
+syntax = "proto3";
+package skavl.report.v1;
+
+import "anomaly.proto";
+
+// Request message for generating a report based on anomaly data
+message ReportGenerationRequest {
+  skavl.anomaly.v1.ProjectMetadata project_metadata = 1;
+  repeated skavl.anomaly.v1.AnomalySet anomaly_sets = 2;
+  float confidence_threshold = 3;
+}
+
+// Response containing the URL to the generated report
+message ReportGenerationResponse {
+  string report_url = 1;
+}
+
+// Service for generating reports from anomaly data
+service ReportService {
+  // Generates a report based on the provided anomaly sets and metadata
+  rpc GenerateReport(ReportGenerationRequest) returns (ReportGenerationResponse);
+}
+
+
