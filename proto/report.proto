@@ -17,8 +17,11 @@ message ReportGenerationResponse {
 
 // Service for generating reports from anomaly data
 service ReportService {
-  // Generates a report based on the provided anomaly sets and metadata
-  rpc GenerateReport(ReportGenerationRequest) returns (ReportGenerationResponse);
+  // Generates a unclassified report based on the provided anomaly sets and metadata
+  rpc GenerateReportUnclassified(ReportGenerationRequest) returns (ReportGenerationResponse);
+  // Generates a classified report based on the provided anomaly sets and metadata
+  rpc GenerateReportClassified(ReportGenerationRequest) returns (ReportGenerationResponse);
+
 }
 
 
