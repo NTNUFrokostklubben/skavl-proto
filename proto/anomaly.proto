@@ -76,8 +76,23 @@ message DetectAnomalySetResponse {
     AnomalyResponse anomaly_response = 1;
 }
 
+// Progress reporting service
+// Takes project name and queries the sqlite to check what the last processed image index is.
+message GetProgressRequest {
+  string project_name = 1;
+}
+
+// Response from progress report.
+// Includes project name for verification against currently loaded project, last processed image index and total images.
+message GetProgressResponse {
+    string project_name = 1;
+    int32 last_processed_image = 2;
+    int32 total_images = 3; 
+}
+
 // gRPC contracts
 service AnomalyDetectorService {
     rpc DescribeAnomalyProject(DescribeAnomalyProjectRequest) returns (DescribeAnomalyProjectResponse);
     rpc DetectAnomalySet(DetectAnomalySetRequest) returns (DetectAnomalySetResponse);
+    rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
 }
