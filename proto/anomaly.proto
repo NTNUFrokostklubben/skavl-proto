@@ -14,6 +14,7 @@ enum AnomalyTypes{
     COLOR_AVERAGE = 1;
     WATER_MASK = 2;
     ARTIFACT = 3;
+    ARTIFACT_LINE = 4;
 }
 
 // Easting and Northing meter offsets from the 0,0 origo for the UTM zone (usually center-point from geotiff gdalinfo)
@@ -30,7 +31,7 @@ message AnomalySet {
     int32 line_number = 4;
     int32 image_number = 5;
     UtmCoordinate geotiff_coordinate = 6;
-    optional string  user_classification = 7 
+    optional string  user_classification = 7;
     
 }
 
