@@ -30,6 +30,7 @@ message AnomalySet {
     int32 line_number = 4;
     int32 image_number = 5;
     UtmCoordinate geotiff_coordinate = 6;
+    optional string  user_classification = 7 
     
 }
 
