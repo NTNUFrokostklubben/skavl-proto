@@ -91,9 +91,20 @@ message GetProgressResponse {
     int32 total_images = 3; 
 }
 
+// Request to stop a running analysis with given project name.
+message StopAnalysisRequest {
+    string project_name = 1;
+}
+
+// Ack bool to confirm that stop request was received.
+message StopAnalysisResponse {
+    string acknowledged = 1;
+}
+
 // gRPC contracts
 service AnomalyDetectorService {
     rpc DescribeAnomalyProject(DescribeAnomalyProjectRequest) returns (DescribeAnomalyProjectResponse);
     rpc DetectAnomalySet(DetectAnomalySetRequest) returns (DetectAnomalySetResponse);
     rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
+    rpc StopAnalysis(StopAnalysisRequest) returns (StopAnalysisResponse);
 }
