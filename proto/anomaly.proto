@@ -98,7 +98,7 @@ message StopAnalysisRequest {
 
 // Ack bool to confirm that stop request was received.
 message StopAnalysisResponse {
-    string acknowledged = 1;
+    bool acknowledged = 1;
 }
 
 // gRPC contracts
