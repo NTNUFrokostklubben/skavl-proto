@@ -9,6 +9,7 @@ message ReportGenerationRequest {
   repeated skavl.anomaly.v1.AnomalySet anomaly_sets = 2;
   float confidence_threshold = 3;
   string locale = 4; // e.g., "en", "no"
+  string save_location = 5;
 }
 
 // Response containing the URL to the generated report
