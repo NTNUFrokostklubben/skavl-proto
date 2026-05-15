@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package skavl.shutdown;
+
+service ShutdownService {
+  rpc Shutdown(ShutdownRequest) returns (ShutdownResponse);
+}
+
+// Empty as its just a shutdown entrypoint
+message ShutdownRequest {}
+// Empty as its just a shutdown entrypoint
+message ShutdownResponse {}
